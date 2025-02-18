@@ -1,5 +1,5 @@
-import SpotifySearchResults from '@/shared/components/SpotifySearchResults';
 import { type GeneralSearchResponse } from '@/shared/types/generalSearch';
+import GeneralSearch from '@/shared/views/GeneralSearch';
 
 export default async function SearchPage({
   params,
@@ -15,5 +15,5 @@ export default async function SearchPage({
 
   const data: GeneralSearchResponse = await response.json();
 
-  return <SpotifySearchResults searchResults={data} />;
+  return <GeneralSearch searchResults={data} />;
 }
