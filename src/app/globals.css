@@ -3,15 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 body {
@@ -20,8 +13,26 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+#app {
+  display: grid;
+  grid-template-areas:
+    'aside main main'
+    'player player player';
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: 1fr 70px;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .grid-area-aside {
+    grid-area: aside;
+  }
+  .grid-area-main {
+    grid-area: main;
+  }
+  .grid-area-player {
+    grid-area: player;
   }
 }
