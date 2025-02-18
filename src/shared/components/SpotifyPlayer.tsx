@@ -21,41 +21,52 @@ export default function SpotifyPlayer() {
   const [isPaused, setPaused] = useState<boolean>(false);
   const [isActive, setActive] = useState<boolean>(false);
   const [currentTrack, setTrack] = useState<SpotifyTrack | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const playerRef = useRef<SpotifyPlayerType | null>(null);
+  const tokenFetched = useRef<boolean>(false);
 
   useEffect(() => {
+    if (tokenFetched.current) return;
+    tokenFetched.current = true;
+
+    const fetchToken = async () => {
+      try {
+        const res = await fetch('/api/auth');
+        const data = (await res.json()) as { token: string };
+        setToken(data.token);
+      } catch (error) {
+        console.error('Error fetching token:', error);
+      }
+    };
+
+    fetchToken();
+  }, []);
+
+  useEffect(() => {
+    if (!token) return;
+
     const script = document.createElement('script');
     script.src = 'https://sdk.scdn.co/spotify-player.js';
     script.async = true;
-
     document.body.appendChild(script);
 
     window.onSpotifyWebPlaybackSDKReady = () => {
       const player = new window.Spotify.Player({
         name: 'Web Playback SDK',
         getOAuthToken: (cb) => {
-          fetch('/api/auth')
-            .then(async (res) => await res.json())
-            .then((data: { token: string }) => {
-              cb(data.token);
-            });
+          cb(token);
         },
         volume: 0.5,
       });
 
       playerRef.current = player;
 
-      playerRef.current.addListener(
+      player.addListener(
         'ready',
         async ({ device_id: deviceId }: SpotifyDevice) => {
           console.log('Ready with Device ID', deviceId);
 
           try {
-            const token = await fetch('/api/auth')
-              .then(async (res) => await res.json())
-              .then((data) => data.token);
-
-            // Transfer playback to the Web Player
             await fetch('https://api.spotify.com/v1/me/player', {
               method: 'PUT',
               headers: {
@@ -64,7 +75,7 @@ export default function SpotifyPlayer() {
               },
               body: JSON.stringify({
                 device_ids: [deviceId],
-                play: true, // Set to true to start playback immediately
+                play: true,
                 uris: ['spotify:track:5Nm32R9spCURiGw0MRMzyd'],
               }),
             });
@@ -76,35 +87,31 @@ export default function SpotifyPlayer() {
         }
       );
 
-      playerRef.current.addListener(
+      player.addListener(
         'not_ready',
         ({ device_id: deviceId }: SpotifyDevice) => {
           console.log('Device ID has gone offline', deviceId);
         }
       );
 
-      playerRef.current.addListener(
+      player.addListener(
         'player_state_changed',
-        async (state: SpotifyPlayerState | null) => {
-          if (!state) {
-            return;
-          }
+        (state: SpotifyPlayerState | null) => {
+          if (!state) return;
           console.log({ state });
-          console.log({ current_track: state.track_window.current_track });
-
           setTrack(state.track_window.current_track);
           setPaused(state.paused);
         }
       );
 
-      playerRef.current.connect();
+      player.connect();
       setActive(true);
     };
 
     return () => {
       script.remove();
     };
-  }, []);
+  }, [token]);
 
   if (!isActive) {
     return (
