@@ -24,10 +24,10 @@ export default function RootLayout({
         <header className='grid-area-header'>
           <Header />
         </header>
-        <aside className='grid-area-aside bg-section-background overflow-y-auto rounded-lg'>
+        <aside className='grid-area-aside overflow-y-auto rounded-lg bg-foreground'>
           <AsideMenu />
         </aside>
-        <main className='grid-area-main bg-section-background overflow-y-auto rounded-lg'>
+        <main className='grid-area-main overflow-y-auto rounded-lg bg-foreground'>
           {children}
         </main>
         <footer className='grid-area-player flex items-center justify-between bg-black px-3'>

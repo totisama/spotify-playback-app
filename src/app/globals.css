@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #000000;
-  --foreground: #ededed;
-  --section-background: #121212;
+  --primary: #ffffff;
+  --secondary: #121212;
+  --foreground: #1f1f1f;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--primary);
+  background: black;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -39,5 +39,11 @@ body {
   }
   .grid-area-header {
     grid-area: header;
+  }
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
   }
 }

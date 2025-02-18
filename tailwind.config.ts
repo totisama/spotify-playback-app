@@ -9,9 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
+        primary: 'var(--primary)',
+        secondary: 'var(--secondary)',
         foreground: 'var(--foreground)',
-        'section-background': 'var(--section-background)',
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
