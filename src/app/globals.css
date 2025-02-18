@@ -21,7 +21,8 @@ body {
     'aside main main'
     'player player player';
   grid-template-columns: 280px 1fr;
-  grid-template-rows: 50px 1fr 70px;
+  grid-template-rows: 60px 1fr 70px;
+  grid-column-gap: 8px;
 }
 
 @layer utilities {

@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang='en'>
       <body
         id='app'
-        className='h-screen gap-2 p-2'
+        className='h-screen px-2'
       >
         <header className='grid-area-header'>
           <Header />
