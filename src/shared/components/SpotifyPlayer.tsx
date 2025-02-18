@@ -2,6 +2,13 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import {
+  type SpotifySDK,
+  type SpotifyPlayer as SpotifyPlayerType,
+  type SpotifyPlayerState,
+  type SpotifyTrack,
+  type SpotifyDevice,
+} from '@/shared/types/spotify';
 
 declare global {
   interface Window {
@@ -10,35 +17,11 @@ declare global {
   }
 }
 
-interface SpotifySDK {
-  Player: new (options: {
-    name: string;
-    getOAuthToken: (cb: (token: string) => void) => void;
-    volume: number;
-  }) => Spotify.Player;
-}
-
-interface SpotifyTrack {
-  album: {
-    images: Array<{ url: string }>;
-  };
-  name: string;
-  artists: Array<{ name: string }>;
-}
-
-interface SpotifyPlayerState {
-  position: number;
-  duration: number;
-  track_window: {
-    current_track: SpotifyTrack;
-  };
-}
-
 export default function SpotifyPlayer() {
-  const [isPaused, setPaused] = useState(false);
-  const [isActive, setActive] = useState(false);
+  const [isPaused, setPaused] = useState<boolean>(false);
+  const [isActive, setActive] = useState<boolean>(false);
   const [currentTrack, setTrack] = useState<SpotifyTrack | null>(null);
-  const playerRef = useRef<Spotify.Player | null>(null);
+  const playerRef = useRef<SpotifyPlayerType | null>(null);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -53,7 +36,7 @@ export default function SpotifyPlayer() {
         getOAuthToken: (cb) => {
           fetch('/api/auth')
             .then(async (res) => await res.json())
-            .then((data) => {
+            .then((data: { token: string }) => {
               cb(data.token);
             });
         },
@@ -61,39 +44,44 @@ export default function SpotifyPlayer() {
       });
 
       playerRef.current = player;
-      console.log({ player: playerRef.current });
 
-      playerRef.current.addListener('ready', async ({ device_id }) => {
-        console.log('Ready with Device ID', device_id);
+      playerRef.current.addListener(
+        'ready',
+        async ({ device_id: deviceId }: SpotifyDevice) => {
+          console.log('Ready with Device ID', deviceId);
 
-        try {
-          const token = await fetch('/api/auth')
-            .then(async (res) => await res.json())
-            .then((data) => data.token);
+          try {
+            const token = await fetch('/api/auth')
+              .then(async (res) => await res.json())
+              .then((data) => data.token);
 
-          // Transfer playback to the Web Player
-          await fetch('https://api.spotify.com/v1/me/player', {
-            method: 'PUT',
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              device_ids: [device_id],
-              play: true, // Set to true to start playback immediately
-              uris: ['spotify:track:5Nm32R9spCURiGw0MRMzyd'],
-            }),
-          });
+            // Transfer playback to the Web Player
+            await fetch('https://api.spotify.com/v1/me/player', {
+              method: 'PUT',
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                device_ids: [deviceId],
+                play: true, // Set to true to start playback immediately
+                uris: ['spotify:track:5Nm32R9spCURiGw0MRMzyd'],
+              }),
+            });
 
-          console.log('Playback transferred to Web Player');
-        } catch (error) {
-          console.error('Error transferring playback:', error);
+            console.log('Playback transferred to Web Player');
+          } catch (error) {
+            console.error('Error transferring playback:', error);
+          }
         }
-      });
+      );
 
-      playerRef.current.addListener('not_ready', ({ device_id }) => {
-        console.log('Device ID has gone offline', device_id);
-      });
+      playerRef.current.addListener(
+        'not_ready',
+        ({ device_id: deviceId }: SpotifyDevice) => {
+          console.log('Device ID has gone offline', deviceId);
+        }
+      );
 
       playerRef.current.addListener(
         'player_state_changed',
