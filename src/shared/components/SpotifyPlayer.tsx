@@ -8,7 +8,7 @@ import {
   type SpotifyPlayerState,
   type SpotifyTrack,
   type SpotifyDevice,
-} from '@/shared/types/spotify';
+} from '@/shared/types/spotifySDK';
 
 declare global {
   interface Window {

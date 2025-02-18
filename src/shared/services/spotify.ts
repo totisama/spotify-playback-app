@@ -1,3 +1,5 @@
+import { ACCOUNT_URL } from '@/shared/constants';
+
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID as string;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET as string;
 const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN as string;
@@ -17,7 +19,7 @@ export async function getAccessToken(): Promise<string> {
   }
 
   const basic = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64');
-  const response = await fetch('https://accounts.spotify.com/api/token', {
+  const response = await fetch(`${ACCOUNT_URL}/api/token`, {
     method: 'POST',
     headers: {
       Authorization: `Basic ${basic}`,
