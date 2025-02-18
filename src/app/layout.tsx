@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { type ReactNode } from 'react';
 import { AsideMenu } from '@/shared/layout/AsideMenu';
 import { Player } from '@/shared/layout/Player';
+import { Header } from '@/shared/layout/Header';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -20,6 +21,9 @@ export default function RootLayout({
         id='app'
         className='h-screen gap-2 p-2'
       >
+        <header className='grid-area-header'>
+          <Header />
+        </header>
         <aside className='grid-area-aside bg-section-background overflow-y-auto rounded-lg'>
           <AsideMenu />
         </aside>

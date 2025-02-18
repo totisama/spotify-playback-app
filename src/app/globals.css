@@ -17,10 +17,11 @@ body {
 #app {
   display: grid;
   grid-template-areas:
+    'header header header'
     'aside main main'
     'player player player';
-  grid-template-columns: 280px 1fr;
-  grid-template-rows: 1fr 70px;
+  grid-template-columns: 350px 1fr;
+  grid-template-rows: 50px 1fr 70px;
 }
 
 @layer utilities {
@@ -35,5 +36,8 @@ body {
   }
   .grid-area-player {
     grid-area: player;
+  }
+  .grid-area-header {
+    grid-area: header;
   }
 }
