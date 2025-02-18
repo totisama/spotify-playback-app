@@ -20,10 +20,10 @@ export default function RootLayout({
         id='app'
         className='h-screen gap-2 p-2'
       >
-        <aside className='grid-area-aside flex flex-col overflow-y-auto'>
+        <aside className='grid-area-aside bg-section-background overflow-y-auto rounded-lg'>
           <AsideMenu />
         </aside>
-        <main className='grid-area-main w-full overflow-y-auto rounded-lg bg-zinc-900'>
+        <main className='grid-area-main bg-section-background overflow-y-auto rounded-lg'>
           {children}
         </main>
         <footer className='grid-area-player flex items-center justify-between bg-black px-3'>
