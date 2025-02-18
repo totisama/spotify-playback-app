@@ -1,7 +1,7 @@
 export default function HomePage() {
   return (
-    <main>
+    <div>
       <h1>Spotify Web Playback</h1>
-    </main>
+    </div>
   );
 }

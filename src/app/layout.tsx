@@ -24,7 +24,7 @@ export default function RootLayout({
         <header className='grid-area-header'>
           <Header />
         </header>
-        <aside className='grid-area-aside overflow-y-auto rounded-lg bg-foreground'>
+        <aside className='grid-area-aside bg-secondary overflow-y-auto rounded-lg'>
           <AsideMenu />
         </aside>
         <main className='grid-area-main overflow-y-auto rounded-lg bg-foreground'>

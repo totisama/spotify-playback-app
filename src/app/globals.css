@@ -20,7 +20,7 @@ body {
     'header header header'
     'aside main main'
     'player player player';
-  grid-template-columns: 350px 1fr;
+  grid-template-columns: 280px 1fr;
   grid-template-rows: 50px 1fr 70px;
 }
 
