@@ -1,5 +1,5 @@
 import { SpotifyIcon } from '@/shared/design/icons';
-import { SearchInput } from '@/shared/components/SearchInput';
+import { SearchInput } from '@/shared/components/globals/SearchInput';
 import Link from 'next/link';
 
 export const Header = () => {
