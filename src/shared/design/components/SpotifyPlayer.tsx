@@ -1,13 +1,18 @@
 'use client';
 
 import Image from 'next/image';
-import { useSpotifyPlayer } from '@/shared/context/SpotifyPlayerContext';
 import { useSpotifyControls } from '@/shared/hooks/useSpotifyControls';
 import { Loader } from '@/shared/design/components/globals/Loader';
 
 export default function SpotifyPlayerControls() {
-  const { isPaused, isActive, currentTrack } = useSpotifyPlayer();
-  const { playPause, nextTrack, previousTrack } = useSpotifyControls();
+  const {
+    playPause,
+    nextTrack,
+    previousTrack,
+    isPaused,
+    isActive,
+    currentTrack,
+  } = useSpotifyControls();
 
   if (!isActive) {
     return (

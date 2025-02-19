@@ -4,7 +4,9 @@ import { useCallback } from 'react';
 import { useSpotifyPlayer } from '@/shared/context/SpotifyPlayerContext';
 
 export function useSpotifyControls() {
-  const { playerRef } = useSpotifyPlayer();
+  const { playerRef, deviceIdRef, token, isPaused, isActive, currentTrack } =
+    useSpotifyPlayer();
+
   const ensurePlaybackActive = async () => {
     if (!deviceIdRef.current) {
       console.warn('No active device. Transferring playback...');
@@ -71,5 +73,13 @@ export function useSpotifyControls() {
     }
   }, [playerRef]);
 
-  return { playPause, nextTrack, previousTrack };
+  return {
+    playPause,
+    nextTrack,
+    previousTrack,
+    playSong,
+    isPaused,
+    isActive,
+    currentTrack,
+  };
 }

@@ -29,7 +29,8 @@ interface SpotifyPlayerContextType {
   isPaused: boolean;
   isActive: boolean;
   currentTrack: SpotifyTrack | null;
-  playSong: (uri: string) => void;
+  token: string | null;
+  deviceIdRef: MutableRefObject<string | null>;
 }
 
 const SpotifyPlayerContext = createContext<
@@ -134,7 +135,14 @@ export function SpotifyPlayerProvider({ children }: { children: ReactNode }) {
 
   return (
     <SpotifyPlayerContext.Provider
-      value={{ playerRef, isPaused, isActive, currentTrack, playSong }}
+      value={{
+        playerRef,
+        isPaused,
+        isActive,
+        currentTrack,
+        token,
+        deviceIdRef,
+      }}
     >
       {children}
     </SpotifyPlayerContext.Provider>

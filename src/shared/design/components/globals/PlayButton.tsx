@@ -1,9 +1,9 @@
 'use client';
 
-import { useSpotifyPlayer } from '@/shared/context/SpotifyPlayerContext';
+import { useSpotifyControls } from '@/shared/hooks/useSpotifyControls';
 
 export const PlayButton = ({ uri }: { uri: string }) => {
-  const { playSong } = useSpotifyPlayer();
+  const { playSong } = useSpotifyControls();
 
   return (
     <button
