@@ -45,27 +45,6 @@ export function SpotifyPlayerProvider({ children }: { children: ReactNode }) {
   const deviceIdRef = useRef<string | null>(null);
   const tokenFetched = useRef<boolean>(false);
 
-  const playSong = async (uri: string) => {
-    if (!deviceIdRef.current) {
-      return;
-    }
-
-    try {
-      await fetch('https://api.spotify.com/v1/me/player/play', {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          uris: [uri],
-        }),
-      });
-    } catch (error) {
-      console.error('Error transferring playback:', error);
-    }
-  };
-
   // Fetch Spotify Access Token
   useEffect(() => {
     if (tokenFetched.current) return;
