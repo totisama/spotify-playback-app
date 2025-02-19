@@ -1,9 +1,9 @@
 import { type GeneralSearchResponse } from '@/shared/types/generalSearch';
-import { ArtistItem } from '@/shared/components/items/ArtistItem';
-import { TrackItem } from '@/shared/components/items/TrackItem';
-import { TopTrack } from '@/shared/components/items/TopTrack';
-import { AlbumItem } from '@/shared/components/items/AlbumItem';
-import { NotFoundMessage } from '@/shared/components/globals/NotFoundMessage';
+import { ArtistItem } from '@/shared/design/components/items/ArtistItem';
+import { TrackItem } from '@/shared/design/components/items/TrackItem';
+import { TopTrack } from '@/shared/design/components/items/TopTrack';
+import { AlbumItem } from '@/shared/design/components/items/AlbumItem';
+import { NotFoundMessage } from '@/shared/design/components/globals/NotFoundMessage';
 import { Section } from '@/shared/design/layout/Section';
 
 interface GeneralSearchProps {
