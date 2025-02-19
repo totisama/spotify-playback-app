@@ -1,5 +1,6 @@
 import { type GeneralSearchResponse } from '@/shared/types/generalSearch';
 import GeneralSearch from '@/shared/design/views/GeneralSearch';
+import { Error } from '@/shared/components/globals/Error';
 
 export default async function SearchPage({
   params,
@@ -10,7 +11,7 @@ export default async function SearchPage({
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/general-search?q=${encodeURIComponent(params.search)}`
   );
   if (!response.ok) {
-    return <h1>Error fetching data</h1>;
+    return <Error text={'Failed to fetch search results'} />;
   }
 
   const data: GeneralSearchResponse = await response.json();
