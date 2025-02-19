@@ -3,6 +3,7 @@ import { ArtistItem } from '@/shared/components/items/ArtistItem';
 import { TrackItem } from '@/shared/components/items/TrackItem';
 import { TopTrack } from '@/shared/components/items/TopTrack';
 import { AlbumItem } from '@/shared/components/items/AlbumItem';
+import { NotFoundMessage } from '@/shared/components/globals/NotFoundMessage';
 
 interface GeneralSearchProps {
   searchResults: GeneralSearchResponse;
@@ -13,7 +14,7 @@ const GeneralSearch = ({ searchResults }: GeneralSearchProps) => {
   const topTrack = tracks.items.length > 0 ? tracks.items[0] : null;
 
   return (
-    <div className=' p-6 text-white'>
+    <div className='p-6'>
       {/* Top Result Section */}
       {topTrack && (
         <section className='mb-8'>
@@ -35,7 +36,7 @@ const GeneralSearch = ({ searchResults }: GeneralSearchProps) => {
             ))}
           </ul>
         ) : (
-          <p className='text-gray-400'>No tracks found</p>
+          <NotFoundMessage text={'No tracks found'} />
         )}
       </section>
 
@@ -52,7 +53,7 @@ const GeneralSearch = ({ searchResults }: GeneralSearchProps) => {
             ))}
           </ul>
         ) : (
-          <p className='text-gray-400'>No artists found</p>
+          <NotFoundMessage text={'No artists found'} />
         )}
       </section>
 
@@ -69,7 +70,7 @@ const GeneralSearch = ({ searchResults }: GeneralSearchProps) => {
             ))}
           </ul>
         ) : (
-          <p className='text-gray-400'>No albums found</p>
+          <NotFoundMessage text={'No albums found'} />
         )}
       </section>
     </div>
