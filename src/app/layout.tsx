@@ -3,6 +3,7 @@ import { type ReactNode } from 'react';
 import { AsideMenu } from '@/shared/design/layout/AsideMenu';
 import { Player } from '@/shared/design/layout/Player';
 import { Header } from '@/shared/design/layout/Header';
+import { SpotifyPlayerProvider } from '@/shared/context/SpotifyPlayerContext';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -21,18 +22,20 @@ export default function RootLayout({
         id='app'
         className='h-screen px-2'
       >
-        <header className='grid-area-header'>
-          <Header />
-        </header>
-        <aside className='grid-area-aside overflow-y-auto rounded-lg bg-secondary'>
-          <AsideMenu />
-        </aside>
-        <main className='grid-area-main overflow-y-auto rounded-lg bg-foreground p-6'>
-          {children}
-        </main>
-        <footer className='grid-area-player flex items-center justify-between bg-black px-3'>
-          <Player />
-        </footer>
+        <SpotifyPlayerProvider>
+          <header className='grid-area-header'>
+            <Header />
+          </header>
+          <aside className='grid-area-aside overflow-y-auto rounded-lg bg-secondary'>
+            <AsideMenu />
+          </aside>
+          <main className='grid-area-main overflow-y-auto rounded-lg bg-foreground p-6'>
+            {children}
+          </main>
+          <footer className='grid-area-player flex items-center justify-between bg-black px-3'>
+            <Player />
+          </footer>
+        </SpotifyPlayerProvider>
       </body>
     </html>
   );
