@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getAccessToken } from '@/shared/services/spotify';
+import { getAccessToken } from '@/shared/services/spotifyAuth';
 
 export async function GET() {
   try {
