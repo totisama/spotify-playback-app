@@ -3,7 +3,7 @@ import { ACCOUNT_URL } from '@/shared/constants';
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID as string;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET as string;
 
-let REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN as string;
+let refreshToken = process.env.SPOTIFY_REFRESH_TOKEN as string;
 
 interface SpotifyToken {
   access_token: string;
@@ -37,7 +37,7 @@ export async function getAccessToken(forceRefresh = false): Promise<string> {
     },
     body: new URLSearchParams({
       grant_type: 'refresh_token',
-      refresh_token: REFRESH_TOKEN,
+      refresh_token: refreshToken,
     }).toString(),
   });
 
@@ -55,7 +55,7 @@ export async function getAccessToken(forceRefresh = false): Promise<string> {
   tokenExpirationTime = Date.now() + data.expires_in * 1000;
 
   if (data.refresh_token) {
-    REFRESH_TOKEN = data.refresh_token;
+    refreshToken = data.refresh_token;
   }
 
   return data.access_token;
