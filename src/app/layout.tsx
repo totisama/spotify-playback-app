@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { type ReactNode } from 'react';
-import { AsideMenu } from '@/shared/layout/AsideMenu';
-import { Player } from '@/shared/layout/Player';
-import { Header } from '@/shared/layout/Header';
+import { AsideMenu } from '@/shared/design/layout/AsideMenu';
+import { Player } from '@/shared/design/layout/Player';
+import { Header } from '@/shared/design/layout/Header';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default function RootLayout({
         <header className='grid-area-header'>
           <Header />
         </header>
-        <aside className='grid-area-aside bg-secondary overflow-y-auto rounded-lg'>
+        <aside className='grid-area-aside overflow-y-auto rounded-lg bg-secondary'>
           <AsideMenu />
         </aside>
         <main className='grid-area-main overflow-y-auto rounded-lg bg-foreground'>

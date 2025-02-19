@@ -1,5 +1,5 @@
 import { type GeneralSearchResponse } from '@/shared/types/generalSearch';
-import GeneralSearch from '@/shared/views/GeneralSearch';
+import GeneralSearch from '@/shared/design/GeneralSearch';
 
 export default async function SearchPage({
   params,
