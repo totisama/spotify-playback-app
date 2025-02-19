@@ -4,6 +4,7 @@ import { TrackItem } from '@/shared/components/items/TrackItem';
 import { TopTrack } from '@/shared/components/items/TopTrack';
 import { AlbumItem } from '@/shared/components/items/AlbumItem';
 import { NotFoundMessage } from '@/shared/components/globals/NotFoundMessage';
+import { Section } from '@/shared/design/layout/Section';
 
 interface GeneralSearchProps {
   searchResults: GeneralSearchResponse;
@@ -17,15 +18,12 @@ const GeneralSearch = ({ searchResults }: GeneralSearchProps) => {
     <div className='p-6'>
       {/* Top Result Section */}
       {topTrack && (
-        <section className='mb-8'>
-          <h2 className='mb-4 text-2xl font-bold'>Top result</h2>
+        <Section title='Top result'>
           <TopTrack topTrack={topTrack} />
-        </section>
+        </Section>
       )}
 
-      {/* Songs Section */}
-      <section className='mb-8'>
-        <h2 className='mb-4 text-2xl font-bold'>Songs</h2>
+      <Section title='Songs'>
         {tracks.items.length > 0 ? (
           <ul className='flex flex-col gap-4'>
             {tracks.items.slice(1, 6).map((track) => (
@@ -38,11 +36,9 @@ const GeneralSearch = ({ searchResults }: GeneralSearchProps) => {
         ) : (
           <NotFoundMessage text={'No tracks found'} />
         )}
-      </section>
+      </Section>
 
-      {/* Artists Section */}
-      <section className='mb-8'>
-        <h2 className='mb-4 text-2xl font-bold'>Artists</h2>
+      <Section title='Artists'>
         {artists.items.length > 0 ? (
           <ul className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-6'>
             {artists.items.slice(0, 6).map((artist) => (
@@ -55,11 +51,9 @@ const GeneralSearch = ({ searchResults }: GeneralSearchProps) => {
         ) : (
           <NotFoundMessage text={'No artists found'} />
         )}
-      </section>
+      </Section>
 
-      {/* Albums Section */}
-      <section className='mb-8'>
-        <h2 className='mb-4 text-2xl font-bold'>Albums</h2>
+      <Section title='Albums'>
         {albums.items.length > 0 ? (
           <ul className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-6'>
             {albums.items.slice(0, 5).map((album) => (
@@ -72,7 +66,7 @@ const GeneralSearch = ({ searchResults }: GeneralSearchProps) => {
         ) : (
           <NotFoundMessage text={'No albums found'} />
         )}
-      </section>
+      </Section>
     </div>
   );
 };
