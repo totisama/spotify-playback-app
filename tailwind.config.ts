@@ -12,6 +12,7 @@ const config: Config = {
         primary: 'var(--primary)',
         secondary: 'var(--secondary)',
         foreground: 'var(--foreground)',
+        'spotify-green': 'var(--green)',
       },
       borderRadius: {
         lg: 'var(--radius)',
