@@ -27,7 +27,7 @@ export default function RootLayout({
         <aside className='grid-area-aside overflow-y-auto rounded-lg bg-secondary'>
           <AsideMenu />
         </aside>
-        <main className='grid-area-main overflow-y-auto rounded-lg bg-foreground'>
+        <main className='grid-area-main overflow-y-auto rounded-lg bg-foreground p-6'>
           {children}
         </main>
         <footer className='grid-area-player flex items-center justify-between bg-black px-3'>
