@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getAccessToken } from '@/shared/services/spotifyAuth';
 
+export const revalidate = 300;
+
 export async function GET() {
   try {
     const token = await getAccessToken();

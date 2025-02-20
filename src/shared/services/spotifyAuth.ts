@@ -24,8 +24,6 @@ export async function getAccessToken(forceRefresh = false): Promise<string> {
     return cachedToken.access_token;
   }
 
-  console.log('Refreshing Spotify access token...');
-
   const basicAuth = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString(
     'base64'
   );
@@ -35,7 +33,6 @@ export async function getAccessToken(forceRefresh = false): Promise<string> {
       Authorization: `Basic ${basicAuth}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    cache: 'no-store',
     body: new URLSearchParams({
       grant_type: 'refresh_token',
       refresh_token: refreshToken,
