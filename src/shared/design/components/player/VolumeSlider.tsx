@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { Volume2, VolumeX, Volume1 } from 'lucide-react';
 import { useDebounce } from '@/shared/hooks/useDebounce';
+import { Slider } from '@/shared/design/ui/slider';
 
 export default function VolumeSlider({
   volume,
@@ -40,15 +41,16 @@ export default function VolumeSlider({
       >
         {getVolumeIcon()}
       </button>
-      <input
-        type='range'
-        min='0'
-        max='100'
-        value={volume}
-        onChange={(e) => {
-          setVolume(Number(e.target.value));
+      <Slider
+        defaultValue={[volume]}
+        min={0}
+        max={100}
+        step={1}
+        dir='ltr'
+        onValueChange={(newVolume) => {
+          setVolume(newVolume[0]);
         }}
-        className='h-1 w-32 cursor-pointer appearance-none rounded-lg bg-spotify-green'
+        className='h-1 w-32 cursor-pointer appearance-none rounded-lg'
       />
     </div>
   );
