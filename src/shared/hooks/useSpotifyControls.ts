@@ -14,6 +14,7 @@ export function useSpotifyControls() {
     currentTrack,
     volume,
     setVolume,
+    setProgress,
   } = useSpotifyPlayer();
 
   const spotifyFetch = async (
@@ -41,7 +42,7 @@ export function useSpotifyControls() {
 
   const ensurePlaybackActive = async () => {
     if (!deviceIdRef.current) {
-      console.warn('No active device. Trying to transfer playback...');
+      console.warn('No active device.');
       return;
     }
     await spotifyFetch('/me/player', 'PUT', {
@@ -57,7 +58,7 @@ export function useSpotifyControls() {
     contextUri?: string;
   }) => {
     if (!deviceIdRef.current) {
-      console.warn('No active device. Trying to transfer playback...');
+      console.warn('No active device.');
       return;
     }
 
@@ -89,9 +90,21 @@ export function useSpotifyControls() {
     playerRef.current?.previousTrack();
   }, [playerRef]);
 
+  const seekPosition = useCallback(
+    (newProgressSeconds: number) => {
+      const positionMS = newProgressSeconds * 1000;
+
+      playerRef.current?.seek(positionMS).then(() => {
+        setProgress(positionMS);
+      });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [playerRef]
+  );
+
   const changeVolume = async (newVolume: number) => {
     if (!deviceIdRef.current) {
-      console.warn('No active device. Trying to transfer playback...');
+      console.warn('No active device.');
       return;
     }
 
@@ -116,5 +129,6 @@ export function useSpotifyControls() {
     volume,
     setVolume,
     changeVolume,
+    seekPosition,
   };
 }

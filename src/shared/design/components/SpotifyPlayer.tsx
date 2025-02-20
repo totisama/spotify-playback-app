@@ -10,6 +10,8 @@ import {
   SkipForwardIcon,
 } from 'lucide-react';
 import VolumeSlider from './player/VolumeSlider';
+import { SeekBar } from './player/SeekBar';
+import { useMemo } from 'react';
 
 export default function SpotifyPlayerControls() {
   const {
@@ -22,7 +24,12 @@ export default function SpotifyPlayerControls() {
     volume,
     setVolume,
     changeVolume,
+    seekPosition,
   } = useSpotifyControls();
+
+  const durationSeconds = useMemo(() => {
+    return currentTrack?.duration_ms ? currentTrack?.duration_ms / 1000 : 0;
+  }, [currentTrack]);
 
   if (!isActive) {
     return (
@@ -51,25 +58,33 @@ export default function SpotifyPlayerControls() {
         </div>
       </div>
 
-      <div className='flex w-2/5 items-center justify-center gap-2'>
-        <button
-          onClick={previousTrack}
-          className='transition-transform duration-300 ease-out hover:scale-110'
-        >
-          <SkipBackIcon className='fill-white' />
-        </button>
-        <button
-          onClick={playPause}
-          className='rounded-full bg-spotify-green p-2 transition-transform duration-300 ease-out hover:scale-110'
-        >
-          {isPaused ? <PlayIcon /> : <PauseIcon />}
-        </button>
-        <button
-          onClick={nextTrack}
-          className='transition-transform duration-300 ease-out hover:scale-110'
-        >
-          <SkipForwardIcon className='fill-white' />
-        </button>
+      <div className='w-2/5'>
+        <div className='flex w-full flex-col items-center gap-1'>
+          <div className='space-x-3'>
+            <button
+              onClick={previousTrack}
+              className='transition-transform duration-300 ease-out hover:scale-110'
+            >
+              <SkipBackIcon className='fill-white' />
+            </button>
+            <button
+              onClick={playPause}
+              className='rounded-full bg-spotify-green p-2 transition-transform duration-300 ease-out hover:scale-110'
+            >
+              {isPaused ? <PlayIcon /> : <PauseIcon />}
+            </button>
+            <button
+              onClick={nextTrack}
+              className='transition-transform duration-300 ease-out hover:scale-110'
+            >
+              <SkipForwardIcon className='fill-white' />
+            </button>
+          </div>
+          <SeekBar
+            duration={durationSeconds}
+            onSeek={seekPosition}
+          />
+        </div>
       </div>
 
       <div className='flex w-[30%] items-center justify-end'>
