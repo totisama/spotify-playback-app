@@ -40,7 +40,7 @@ const GeneralSearch = ({ searchResults }: GeneralSearchProps) => {
 
       <Section title='Artists'>
         {artists.items.length > 0 ? (
-          <ul className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-6'>
+          <ul className='md:grid-cols-auto-fill grid w-full grid-cols-1 gap-5'>
             {artists.items.slice(0, 6).map((artist) => (
               <ArtistItem
                 key={artist.id}
