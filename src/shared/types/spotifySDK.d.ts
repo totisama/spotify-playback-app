@@ -22,6 +22,11 @@ export interface SpotifyTrack {
   };
   name: string;
   artists: Array<{ name: string }>;
+  duration_ms: number;
+  id: string;
+  is_playable: boolean;
+  uid: string;
+  uri: string;
 }
 
 export interface SpotifyDevice {

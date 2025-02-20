@@ -42,7 +42,7 @@ export default function VolumeSlider({
         {getVolumeIcon()}
       </button>
       <Slider
-        defaultValue={[volume]}
+        defaultValue={[volume * 100]}
         min={0}
         max={100}
         step={1}
