@@ -4,7 +4,7 @@ import { SPOTIFY_API_URL } from '@/shared/constants';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const searchQuery = searchParams.get('id');
+  const searchQuery = searchParams.get('q');
 
   if (!searchQuery) {
     return NextResponse.json(
