@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { getAccessToken } from '@/shared/services/spotifyAuth';
-import { API_URL } from '@/shared/constants';
+import { SPOTIFY_API_URL } from '@/shared/constants';
 
 export async function GET(req: NextRequest) {
   const searchQuery = req.nextUrl.searchParams.get('q');
@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
   try {
     const accessToken = await getAccessToken();
     const response = await fetch(
-      `${API_URL}/search?q=${encodeURIComponent(searchQuery)}&type=artist%2Calbum%2Ctrack`,
+      `${SPOTIFY_API_URL}/search?q=${encodeURIComponent(searchQuery)}&type=artist%2Calbum%2Ctrack`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
