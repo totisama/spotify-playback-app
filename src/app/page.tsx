@@ -1,37 +1,46 @@
 import { Error } from '@/shared/design/components/globals/Error';
-import { type FollowingArtistsResponse } from '@/shared/types/spotifyTypes';
+import {
+  type UserInfoResponse,
+  type FollowingArtistsResponse,
+} from '@/shared/types/spotifyTypes';
 import { Section } from '@/shared/design/layout/Section';
 import { ArtistItem } from '@/shared/design/components/items/ArtistItem';
 
 export default async function HomePage() {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/following`
-  );
+  const [followingResponse, userInfoResponse] = await Promise.all([
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/following`),
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/user-info`),
+  ]);
 
-  if (!response.ok) {
-    return <Error text='Failed to fetch followed artists' />;
+  if (!followingResponse.ok || !userInfoResponse.ok) {
+    return <Error text='Failed to fetch data' />;
   }
 
-  const data: FollowingArtistsResponse = await response.json();
-  const artists = data.following.items;
+  const [followingData, userData] = await Promise.all([
+    followingResponse.json(),
+    userInfoResponse.json(),
+  ]);
+
+  const artists = (followingData as FollowingArtistsResponse).following.items;
+  const user: UserInfoResponse = userData.user;
 
   return (
-    <Section
-      title='Followed Artists'
-      customClass='p-6'
-    >
-      {artists.length === 0 ? (
-        <p className='text-gray-400'>You are not following any artists.</p>
-      ) : (
-        <ul className='grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
-          {artists.map((artist) => (
-            <ArtistItem
-              key={artist.id}
-              artist={artist}
-            />
-          ))}
-        </ul>
-      )}
-    </Section>
+    <div className='space-y-4 p-6'>
+      <h2 className='text-3xl text-spotify-green'>Hi, {user.display_name}!</h2>
+      <Section title='Followed Artists'>
+        {artists.length === 0 ? (
+          <p className='text-gray-400'>You are not following any artists.</p>
+        ) : (
+          <ul className='grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
+            {artists.map((artist) => (
+              <ArtistItem
+                key={artist.id}
+                artist={artist}
+              />
+            ))}
+          </ul>
+        )}
+      </Section>
+    </div>
   );
 }
