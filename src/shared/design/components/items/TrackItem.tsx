@@ -15,7 +15,12 @@ export const TrackItem = ({ track }: { track: Track }) => {
           height={50}
           className='rounded-md'
         />
-        <PlayButton uri={track.uri} />
+        <PlayButton
+          mode='track'
+          uri={track.uri}
+        >
+          ▶
+        </PlayButton>
       </div>
       <div className='flex-1'>
         <p className='text-md select-none font-semibold'>{track.name}</p>

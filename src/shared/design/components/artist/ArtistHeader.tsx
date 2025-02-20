@@ -1,8 +1,8 @@
 import { type Artist } from '@/shared/types/spotifyTypes';
 import Image from 'next/image';
+import { PlayButton } from '@/shared/design/components/globals/PlayButton';
 
 export const ArtistHeader = ({ artist }: { artist: Artist }) => {
-  console.log(artist);
   return (
     <div className='relative flex h-[400px] w-full items-end overflow-hidden bg-gradient-to-b from-black/50 to-black p-6'>
       <Image
@@ -18,9 +18,12 @@ export const ArtistHeader = ({ artist }: { artist: Artist }) => {
           {artist.followers.total.toLocaleString()} monthly listeners
         </p>
         <div className='mt-4 flex gap-4'>
-          <button className='rounded-full bg-spotify-green px-6 py-2 text-lg font-bold text-black'>
+          <PlayButton
+            mode='artist'
+            contextUri={artist.uri}
+          >
             ▶ Play
-          </button>
+          </PlayButton>
           <button className='rounded-full bg-gray-800 px-6 py-2 font-bold text-white'>
             Follow
           </button>
