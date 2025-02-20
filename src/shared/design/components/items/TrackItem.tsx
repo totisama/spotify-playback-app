@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { type TracksItem } from '@/shared/types/generalSearch';
 import { formatDuration } from '@/shared/lib/formatDuration';
 import { PlayButton } from '@/shared/design/components/globals/PlayButton';
+import Link from 'next/link';
 
 export const TrackItem = ({ track }: { track: TracksItem }) => {
   return (
@@ -17,12 +18,20 @@ export const TrackItem = ({ track }: { track: TracksItem }) => {
         <PlayButton uri={track.uri} />
       </div>
       <div className='flex-1'>
-        <p className='text-md font-semibold'>{track.name}</p>
-        <p className='text-sm text-gray-400'>
-          {track.artists.map((artist) => artist.name).join(', ')}
-        </p>
+        <p className='text-md select-none font-semibold'>{track.name}</p>
+        <div>
+          {track.artists.map((artist) => (
+            <Link
+              key={artist.id}
+              href={`/artist/${artist.id}`}
+              className='text-sm text-gray-400 after:content-[",_"] last:after:content-none hover:underline'
+            >
+              {artist.name}
+            </Link>
+          ))}
+        </div>
       </div>
-      <span className='text-sm text-gray-400'>
+      <span className='select-none text-sm text-gray-400'>
         {formatDuration(track.duration_ms)}
       </span>
     </li>
