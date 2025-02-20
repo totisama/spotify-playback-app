@@ -3,25 +3,59 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --primary: #ffffff;
+  --secondary: #121212;
+  --foreground: #1f1f1f;
+  --green: #1ed760;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--primary);
+  background: black;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0px 100px 100px 0px;
+  background: rgba(90, 90, 90);
+}
+
+#app {
+  display: grid;
+  grid-template-areas:
+    'header header header'
+    'aside main main'
+    'player player player';
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: 60px 1fr 80px;
+  grid-column-gap: 8px;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .grid-area-aside {
+    grid-area: aside;
+  }
+  .grid-area-main {
+    grid-area: main;
+  }
+  .grid-area-player {
+    grid-area: player;
+  }
+  .grid-area-header {
+    grid-area: header;
+  }
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
   }
 }
