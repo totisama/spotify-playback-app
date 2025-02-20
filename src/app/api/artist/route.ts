@@ -4,7 +4,9 @@ import { type NextRequest, NextResponse } from 'next/server';
 
 async function fetchFromSpotify(endpoint: string, token: string) {
   const res = await fetch(`${SPOTIFY_API_URL}${endpoint}`, {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
 
   if (!res.ok) throw new Error(`Failed to fetch ${endpoint}`);
