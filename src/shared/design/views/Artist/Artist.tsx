@@ -3,11 +3,7 @@ import { TopTracks } from '@/shared/design/components/artist/TopTracks';
 import { type ArtistSearchResponse } from '@/shared/types/spotifyTypes';
 import { AlbumsGrid } from '@/shared/design/components/artist/AlbumsGrid';
 
-export const Artist = ({
-  artistInfo,
-}: {
-  artistInfo: ArtistSearchResponse;
-}) => {
+const Artist = ({ artistInfo }: { artistInfo: ArtistSearchResponse }) => {
   return (
     <>
       <ArtistHeader artist={artistInfo.artist} />
@@ -18,3 +14,5 @@ export const Artist = ({
     </>
   );
 };
+
+export default Artist;

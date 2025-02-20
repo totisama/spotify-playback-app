@@ -1,5 +1,5 @@
 import { Error } from '@/shared/design/components/globals/Error';
-import { Artist } from '@/shared/design/views/Artist/Artist';
+import Artist from '@/shared/design/views/Artist';
 import { type ArtistSearchResponse } from '@/shared/types/spotifyTypes';
 
 export default async function ArtistPage({
