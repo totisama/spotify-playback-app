@@ -3,7 +3,8 @@ import { getAccessToken } from '@/shared/services/spotifyAuth';
 import { SPOTIFY_API_URL } from '@/shared/constants';
 
 export async function GET(req: NextRequest) {
-  const searchQuery = req.nextUrl.searchParams.get('q');
+  const { searchParams } = new URL(req.url);
+  const searchQuery = searchParams.get('id');
 
   if (!searchQuery) {
     return NextResponse.json(
