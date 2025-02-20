@@ -6,10 +6,13 @@ import {
 import { Section } from '@/shared/design/layout/Section';
 import { ArtistItem } from '@/shared/design/components/items/ArtistItem';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL;
+console.log('Resolved Site URL:', siteUrl);
+
 export default async function HomePage() {
   const [followingResponse, userInfoResponse] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/following`),
-    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/user-info`),
+    fetch(`${siteUrl}/api/following`),
+    fetch(`${siteUrl}/api/user-info`),
   ]);
 
   if (!followingResponse.ok || !userInfoResponse.ok) {
