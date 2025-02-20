@@ -25,7 +25,7 @@ function ErrorFallback({
   resetErrorBoundary: () => void;
 }) {
   return (
-    <div className='flex h-screen flex-col items-center justify-center text-white'>
+    <div className='flex h-full flex-col items-center justify-center bg-foreground text-white'>
       <h2 className='text-xl font-semibold'>Something went wrong</h2>
       <p className='text-gray-400'>{error.message}</p>
       <Button onClick={resetErrorBoundary}>Try Again</Button>
