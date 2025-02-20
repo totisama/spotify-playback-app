@@ -1,3 +1,7 @@
+export interface AlbumSearchResponse {
+  album: Album;
+}
+
 export interface ArtistSearchResponse {
   artist: Artist;
   albums: ArtistAlbums;
@@ -79,6 +83,7 @@ export interface Album {
   type: AlbumTypeEnum;
   uri: string;
   artists: SmallArtist[];
+  tracks?: Tracks;
   is_playable?: boolean;
 }
 
