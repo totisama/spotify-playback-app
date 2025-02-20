@@ -50,6 +50,7 @@ export default function VolumeSlider({
         onValueChange={(newVolume) => {
           setVolume(newVolume[0]);
         }}
+        customBackground='bg-spotify-green'
         className='h-1 w-32 cursor-pointer appearance-none rounded-lg'
       />
     </div>
