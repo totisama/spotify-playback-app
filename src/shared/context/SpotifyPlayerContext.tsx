@@ -33,6 +33,8 @@ interface SpotifyPlayerContextType {
   token: string | null;
   volume: number;
   setVolume: (value: number) => void;
+  progress: number;
+  setProgress: (value: number) => void;
   deviceIdRef: MutableRefObject<string | null>;
 }
 
@@ -46,6 +48,7 @@ export function SpotifyPlayerProvider({ children }: { children: ReactNode }) {
   const [currentTrack, setTrack] = useState<SpotifyTrack | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [volume, setVolume] = useState<number>(INITIAL_VOLUME);
+  const [progress, setProgress] = useState<number>(0);
   const playerRef = useRef<SpotifyPlayerType | null>(null);
   const deviceIdRef = useRef<string | null>(null);
   const tokenFetched = useRef<boolean>(false);
@@ -125,6 +128,7 @@ export function SpotifyPlayerProvider({ children }: { children: ReactNode }) {
           if (!state) return;
           setTrack(state.track_window.current_track);
           setPaused(state.paused);
+          setProgress(state.position);
         }
       );
 
@@ -148,6 +152,8 @@ export function SpotifyPlayerProvider({ children }: { children: ReactNode }) {
         deviceIdRef,
         volume,
         setVolume,
+        progress,
+        setProgress,
       }}
     >
       {children}
