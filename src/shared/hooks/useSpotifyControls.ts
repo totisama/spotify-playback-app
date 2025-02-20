@@ -2,14 +2,23 @@
 
 import { useCallback } from 'react';
 import { useSpotifyPlayer } from '@/shared/context/SpotifyPlayerContext';
+import { SPOTIFY_API_URL } from '@/shared/constants';
 
 export function useSpotifyControls() {
-  const { playerRef, deviceIdRef, token, isPaused, isActive, currentTrack } =
-    useSpotifyPlayer();
+  const {
+    playerRef,
+    deviceIdRef,
+    token,
+    isPaused,
+    isActive,
+    currentTrack,
+    volume,
+    setVolume,
+  } = useSpotifyPlayer();
 
   const ensurePlaybackActive = async () => {
     try {
-      await fetch('https://api.spotify.com/v1/me/player', {
+      await fetch(`${SPOTIFY_API_URL}/me/player`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -59,7 +68,7 @@ export function useSpotifyControls() {
     }
 
     try {
-      await fetch('https://api.spotify.com/v1/me/player/play', {
+      const response = await fetch(`${SPOTIFY_API_URL}/me/player/play`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -67,9 +76,13 @@ export function useSpotifyControls() {
         },
         body: JSON.stringify(body),
       });
+
+      if (!response.ok) {
+        throw new Error(`Failed playing song: ${response.statusText}`);
+      }
       console.log('Playing song:', uri);
     } catch (error) {
-      console.error('Error playing song:', error);
+      console.error('Error:', error);
     }
   };
 
@@ -91,6 +104,42 @@ export function useSpotifyControls() {
     }
   }, [playerRef]);
 
+  const changeVolume = async (newVolume: number) => {
+    if (!deviceIdRef.current) {
+      console.warn('No active device. Trying to transfer playback...');
+      return;
+    }
+
+    console.log(
+      `${SPOTIFY_API_URL}/me/player/volume?volume_percent=${newVolume}`
+    );
+
+    await ensurePlaybackActive();
+    const volumePercent = newVolume < 1 ? newVolume * 100 : newVolume;
+
+    try {
+      const response = await fetch(
+        `${SPOTIFY_API_URL}/me/player/volume?volume_percent=${Number(volumePercent)}`,
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to set volume: ${response.statusText}`);
+      }
+      setVolume(newVolume);
+
+      console.log(`Volume set to ${volume}%`);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return {
     playPause,
     nextTrack,
@@ -99,5 +148,8 @@ export function useSpotifyControls() {
     isPaused,
     isActive,
     currentTrack,
+    volume,
+    setVolume,
+    changeVolume,
   };
 }
