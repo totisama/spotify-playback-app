@@ -7,10 +7,10 @@ export const PlayButton = ({ uri }: { uri: string }) => {
 
   return (
     <button
+      className='bg-spotify-green absolute inset-0 m-auto flex h-10 w-10 scale-50 items-center justify-center rounded-full opacity-0 transition-all duration-300 ease-in-out group-hover:scale-100 group-hover:opacity-100'
       onClick={() => {
         playSong(uri);
       }}
-      className='bg-spotify-green align-center absolute bottom-0 left-0 hidden h-10 w-10 justify-center rounded-full p-2 group-hover:flex'
     >
       ▶
     </button>
