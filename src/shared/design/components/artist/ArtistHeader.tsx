@@ -7,7 +7,7 @@ export const ArtistHeader = ({ artist }: { artist: Artist }) => {
   return (
     <div className='relative flex h-[400px] w-full items-end overflow-hidden bg-gradient-to-b from-black/50 to-black p-6'>
       <Image
-        src={artist.images[0]?.url || '/placeholder.jpg'}
+        src={artist.images[0]?.url || '/placeholder.webp'}
         alt={artist.name}
         height={400}
         width={1000}

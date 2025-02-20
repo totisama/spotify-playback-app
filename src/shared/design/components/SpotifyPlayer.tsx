@@ -26,7 +26,7 @@ export default function SpotifyPlayerControls() {
     <div className='flex w-full items-center justify-between'>
       <div className='flex'>
         <Image
-          src={currentTrack?.album.images[0].url || '/placeholder.svg'}
+          src={currentTrack?.album.images[0].url || '/placeholder.webp'}
           alt=''
           width={50}
           height={50}
