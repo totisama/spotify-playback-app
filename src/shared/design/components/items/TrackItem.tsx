@@ -3,6 +3,7 @@ import { formatDuration } from '@/shared/lib/formatDuration';
 import { PlayButton } from '@/shared/design/components/globals/PlayButton';
 import Link from 'next/link';
 import { type Track } from '@/shared/types/spotifyTypes';
+import { PlayIcon } from 'lucide-react';
 
 export const TrackItem = ({ track }: { track: Track }) => {
   return (
@@ -20,7 +21,7 @@ export const TrackItem = ({ track }: { track: Track }) => {
           uri={track.uri}
           size='small'
         >
-          ▶
+          <PlayIcon className='h-5 w-5 fill-white' />
         </PlayButton>
       </div>
       <div className='flex-1'>

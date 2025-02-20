@@ -1,6 +1,7 @@
 import { type Artist } from '@/shared/types/spotifyTypes';
 import Image from 'next/image';
 import { PlayButton } from '@/shared/design/components/globals/PlayButton';
+import { PlayIcon } from 'lucide-react';
 
 export const ArtistHeader = ({ artist }: { artist: Artist }) => {
   return (
@@ -23,7 +24,7 @@ export const ArtistHeader = ({ artist }: { artist: Artist }) => {
             contextUri={artist.uri}
             size='custom'
           >
-            ▶ Play
+            <PlayIcon className='h-5 w-5 fill-black' /> Play
           </PlayButton>
           <button className='rounded-full bg-gray-800 px-6 py-2 font-bold text-white'>
             Follow

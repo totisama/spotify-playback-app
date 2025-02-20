@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { type Album } from '@/shared/types/spotifyTypes';
 import Link from 'next/link';
 import { PlayButton } from '../globals/PlayButton';
+import { PlayIcon } from 'lucide-react';
 
 export const AlbumItem = ({ album }: { album: Album }) => {
   return (
@@ -23,7 +24,7 @@ export const AlbumItem = ({ album }: { album: Album }) => {
             contextUri={album.uri}
             size='large'
           >
-            ▶
+            <PlayIcon className='h-10 w-10 fill-white' />
           </PlayButton>
         </div>
         <p className='mt-2 truncate font-semibold text-white'>{album.name}</p>
