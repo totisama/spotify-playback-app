@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import { type ArtistsItem } from '@/shared/types/generalSearch';
+import { type Artist } from '@/shared/types/spotifyTypes';
 
-export const ArtistItem = ({ artist }: { artist: ArtistsItem }) => {
+export const ArtistItem = ({ artist }: { artist: Artist }) => {
   return (
     <li className='flex flex-col items-center text-center'>
       <Image

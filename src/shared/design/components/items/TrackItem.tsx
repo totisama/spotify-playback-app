@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import { type TracksItem } from '@/shared/types/generalSearch';
 import { formatDuration } from '@/shared/lib/formatDuration';
 import { PlayButton } from '@/shared/design/components/globals/PlayButton';
 import Link from 'next/link';
+import { type Track } from '@/shared/types/spotifyTypes';
 
-export const TrackItem = ({ track }: { track: TracksItem }) => {
+export const TrackItem = ({ track }: { track: Track }) => {
   return (
     <li className='group flex flex-col items-center gap-4 rounded-lg bg-black p-4 text-center transition hover:bg-black/40 md:flex-row md:text-start'>
       <div className='relative'>

@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { formatDuration } from '@/shared/lib/formatDuration';
-import { type TracksItem } from '@/shared/types/generalSearch';
+import { type Track } from '@/shared/types/spotifyTypes';
 
-export const TopTrack = ({ topTrack }: { topTrack: TracksItem }) => {
+export const TopTrack = ({ topTrack }: { topTrack: Track }) => {
   return (
     <div className='flex flex-col items-center gap-4 rounded-lg bg-black p-6 text-center transition hover:bg-black/40 md:flex-row md:text-start'>
       <Image

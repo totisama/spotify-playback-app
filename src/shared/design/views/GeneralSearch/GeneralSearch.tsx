@@ -1,4 +1,4 @@
-import { type GeneralSearchResponse } from '@/shared/types/generalSearch';
+import { type GeneralSearchResponse } from '@/shared/types/spotifyTypes';
 import { ArtistItem } from '@/shared/design/components/items/ArtistItem';
 import { TrackItem } from '@/shared/design/components/items/TrackItem';
 import { TopTrack } from '@/shared/design/components/items/TopTrack';

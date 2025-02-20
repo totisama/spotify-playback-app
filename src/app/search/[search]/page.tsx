@@ -1,6 +1,6 @@
-import { type GeneralSearchResponse } from '@/shared/types/generalSearch';
 import GeneralSearch from '@/shared/design/views/GeneralSearch';
 import { Error } from '@/shared/design/components/globals/Error';
+import { type GeneralSearchResponse } from '@/shared/types/spotifyTypes';
 
 export default async function SearchPage({
   params,
