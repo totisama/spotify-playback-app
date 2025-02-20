@@ -4,19 +4,23 @@ import Link from 'next/link';
 
 export const ArtistItem = ({ artist }: { artist: Artist }) => {
   return (
-    <li className='group'>
-      <Link
-        href={`/artist/${artist.id}`}
-        className='flex flex-col items-center text-center'
-      >
-        <Image
-          src={artist.images[0]?.url || '/images/placeholder.webp'}
-          alt={artist.name}
-          width={100}
-          height={100}
-          className='aspect-square max-w-96 rounded-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105'
-        />
-        <p className='text-md mt-2 font-semibold'>{artist.name}</p>
+    <li
+      key={artist.id}
+      className='rounded-lg bg-secondary p-4 transition-transform hover:scale-105'
+    >
+      <Link href={`/artist/${artist.id}`}>
+        <div className='relative h-40 w-full'>
+          <Image
+            src={artist.images[0]?.url || '/placeholder.jpg'}
+            alt={artist.name}
+            fill
+            className='rounded-lg object-cover'
+          />
+        </div>
+        <p className='mt-2 truncate text-lg font-semibold'>{artist.name}</p>
+        <p className='text-sm text-gray-400'>
+          {artist.followers.total.toLocaleString()} followers
+        </p>
       </Link>
     </li>
   );
