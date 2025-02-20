@@ -35,9 +35,11 @@ export async function getAccessToken(forceRefresh = false): Promise<string> {
       Authorization: `Basic ${basicAuth}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
+    cache: 'no-store',
     body: new URLSearchParams({
       grant_type: 'refresh_token',
       refresh_token: refreshToken,
+      client_id: CLIENT_ID,
     }).toString(),
   });
 
