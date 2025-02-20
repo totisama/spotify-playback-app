@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { type Album } from '@/shared/types/spotifyTypes';
 import Link from 'next/link';
+import { PlayButton } from '../globals/PlayButton';
 
 export const AlbumItem = ({ album }: { album: Album }) => {
   return (
@@ -9,7 +10,7 @@ export const AlbumItem = ({ album }: { album: Album }) => {
         key={album.id}
         href={`/album/${album.id}`}
       >
-        <div className='aspect-square max-h-60 w-full overflow-hidden rounded-lg'>
+        <div className='relative aspect-square max-h-60 w-full overflow-hidden rounded-lg'>
           <Image
             src={album.images[0]?.url}
             alt={album.name}
@@ -17,6 +18,13 @@ export const AlbumItem = ({ album }: { album: Album }) => {
             height={300}
             className='object-contain transition-transform duration-300 ease-in-out group-hover:scale-105'
           />
+          <PlayButton
+            mode='track'
+            contextUri={album.uri}
+            size='large'
+          >
+            ▶
+          </PlayButton>
         </div>
         <p className='mt-2 truncate font-semibold text-white'>{album.name}</p>
         <p className='text-sm text-gray-400'>
