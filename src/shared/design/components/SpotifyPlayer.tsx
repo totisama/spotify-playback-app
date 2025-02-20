@@ -9,6 +9,7 @@ import {
   SkipBackIcon,
   SkipForwardIcon,
 } from 'lucide-react';
+import VolumeSlider from './player/VolumeSlider';
 
 export default function SpotifyPlayerControls() {
   const {
@@ -18,6 +19,9 @@ export default function SpotifyPlayerControls() {
     isPaused,
     isActive,
     currentTrack,
+    volume,
+    setVolume,
+    changeVolume,
   } = useSpotifyControls();
 
   if (!isActive) {
@@ -68,7 +72,13 @@ export default function SpotifyPlayerControls() {
         </button>
       </div>
 
-      <div className='flex w-[30%] items-center justify-end'>test</div>
+      <div className='flex w-[30%] items-center justify-end'>
+        <VolumeSlider
+          setVolume={setVolume}
+          changeVolume={changeVolume}
+          volume={volume}
+        />
+      </div>
     </div>
   );
 }
