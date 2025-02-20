@@ -55,7 +55,7 @@ const GeneralSearch = ({ searchResults }: GeneralSearchProps) => {
 
       <Section title='Albums'>
         {albums.items.length > 0 ? (
-          <ul className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-6'>
+          <ul className='md:grid-cols-auto-fill grid w-full grid-cols-1 gap-5'>
             {albums.items.slice(0, 5).map((album) => (
               <AlbumItem
                 key={album.id}

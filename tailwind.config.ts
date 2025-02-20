@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        'auto-fill': 'repeat(auto-fill, minmax(250px, 1fr))',
+      },
       colors: {
         primary: 'var(--primary)',
         secondary: 'var(--secondary)',
