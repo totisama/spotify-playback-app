@@ -3,6 +3,12 @@
 import Image from 'next/image';
 import { useSpotifyControls } from '@/shared/hooks/useSpotifyControls';
 import { Loader } from '@/shared/design/components/globals/Loader';
+import {
+  PauseIcon,
+  PlayIcon,
+  SkipBackIcon,
+  SkipForwardIcon,
+} from 'lucide-react';
 
 export default function SpotifyPlayerControls() {
   const {
@@ -24,10 +30,10 @@ export default function SpotifyPlayerControls() {
 
   return (
     <div className='flex w-full items-center justify-between'>
-      <div className='flex'>
+      <div className='flex w-[30%] items-center justify-start'>
         <Image
           src={currentTrack?.album.images[0].url || '/images/placeholder.webp'}
-          alt=''
+          alt={currentTrack?.name || 'No Track Playing'}
           width={50}
           height={50}
           className='mr-4'
@@ -40,26 +46,29 @@ export default function SpotifyPlayerControls() {
           <p className='text-sm'>{currentTrack?.artists[0].name || ''}</p>
         </div>
       </div>
-      <div>
+
+      <div className='flex w-2/5 items-center justify-center gap-2'>
         <button
           onClick={previousTrack}
-          className='ml-auto border p-2'
+          className='transition-transform duration-300 ease-out hover:scale-110'
         >
-          ⏮
+          <SkipBackIcon className='fill-white' />
         </button>
         <button
           onClick={playPause}
-          className='border p-2'
+          className='rounded-full bg-spotify-green p-2 transition-transform duration-300 ease-out hover:scale-110'
         >
-          {isPaused ? '▶' : '⏸'}
+          {isPaused ? <PlayIcon /> : <PauseIcon />}
         </button>
         <button
           onClick={nextTrack}
-          className='border p-2'
+          className='transition-transform duration-300 ease-out hover:scale-110'
         >
-          ⏭
+          <SkipForwardIcon className='fill-white' />
         </button>
       </div>
+
+      <div className='flex w-[30%] items-center justify-end'>test</div>
     </div>
   );
 }
