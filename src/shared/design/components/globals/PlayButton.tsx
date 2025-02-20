@@ -11,7 +11,7 @@ type Size = 'small' | 'large' | 'custom';
 const modes = {
   track:
     'absolute inset-0 m-auto flex h-10 w-10 scale-50 items-center justify-center rounded-full opacity-0 group-hover:scale-100 group-hover:opacity-100',
-  artist: 'px-6 py-2 text-lg font-bold text-black hover:scale-105',
+  artist: 'px-4 py-2 text-lg font-bold text-black hover:scale-105',
 };
 
 const sizes = {
@@ -26,12 +26,14 @@ export const PlayButton = ({
   mode,
   children,
   size = 'custom',
+  customClass,
 }: {
   uri?: string;
   contextUri?: string;
   mode: Mode;
   size?: Size;
   children: ReactNode;
+  customClass?: string;
 }) => {
   const { playSong } = useSpotifyControls();
 
@@ -47,7 +49,8 @@ export const PlayButton = ({
       className={cn(
         'rounded-full bg-spotify-green transition-all duration-300 ease-in-out',
         modes[mode],
-        sizes[size]
+        sizes[size],
+        customClass
       )}
       onClick={handleClick}
     >

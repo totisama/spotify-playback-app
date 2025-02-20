@@ -23,6 +23,7 @@ export const ArtistHeader = ({ artist }: { artist: Artist }) => {
             mode='artist'
             contextUri={artist.uri}
             size='custom'
+            customClass='flex items-center gap-2'
           >
             <PlayIcon className='h-5 w-5 fill-black' /> Play
           </PlayButton>
