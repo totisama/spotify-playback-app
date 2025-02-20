@@ -10,7 +10,7 @@ export const TrackItem = ({ track }: { track: Track }) => {
     <li className='group flex flex-col items-center gap-4 rounded-lg bg-black p-4 text-center transition hover:bg-black/40 md:flex-row md:text-start'>
       <div className='relative'>
         <Image
-          src={track.album.images[0]?.url || '/placeholder.webp'}
+          src={track.album.images[0]?.url || '/images/placeholder.webp'}
           alt={track.name}
           width={50}
           height={50}

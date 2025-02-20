@@ -6,7 +6,7 @@ export const AlbumHeader = ({ album }: { album: Album }) => {
   return (
     <div className='flex h-[300px] w-full items-end gap-10 bg-gradient-to-b from-black/50 to-black p-6'>
       <Image
-        src={album.images[0]?.url || '/placeholder.webp'}
+        src={album.images[0]?.url || '/images/placeholder.webp'}
         alt={album.name}
         width={400}
         height={400}

@@ -10,7 +10,7 @@ export const ArtistItem = ({ artist }: { artist: Artist }) => {
         className='flex flex-col items-center text-center'
       >
         <Image
-          src={artist.images[0]?.url || '/placeholder.webp'}
+          src={artist.images[0]?.url || '/images/placeholder.webp'}
           alt={artist.name}
           width={100}
           height={100}
