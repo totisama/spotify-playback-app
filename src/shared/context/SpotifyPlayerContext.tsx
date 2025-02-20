@@ -16,6 +16,7 @@ import {
   type SpotifyTrack,
   type SpotifyDevice,
 } from '@/shared/types/spotifySDK';
+import { INITIAL_VOLUME } from '@/shared/constants';
 
 declare global {
   interface Window {
@@ -30,6 +31,8 @@ interface SpotifyPlayerContextType {
   isActive: boolean;
   currentTrack: SpotifyTrack | null;
   token: string | null;
+  volume: number;
+  setVolume: (value: number) => void;
   deviceIdRef: MutableRefObject<string | null>;
 }
 
@@ -42,6 +45,7 @@ export function SpotifyPlayerProvider({ children }: { children: ReactNode }) {
   const [isActive, setActive] = useState<boolean>(false);
   const [currentTrack, setTrack] = useState<SpotifyTrack | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [volume, setVolume] = useState<number>(INITIAL_VOLUME);
   const playerRef = useRef<SpotifyPlayerType | null>(null);
   const deviceIdRef = useRef<string | null>(null);
   const tokenFetched = useRef<boolean>(false);
@@ -79,7 +83,7 @@ export function SpotifyPlayerProvider({ children }: { children: ReactNode }) {
         getOAuthToken: (cb) => {
           cb(token);
         },
-        volume: 0.5,
+        volume: INITIAL_VOLUME,
       });
 
       playerRef.current = player;
@@ -142,6 +146,8 @@ export function SpotifyPlayerProvider({ children }: { children: ReactNode }) {
         currentTrack,
         token,
         deviceIdRef,
+        volume,
+        setVolume,
       }}
     >
       {children}
