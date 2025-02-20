@@ -22,7 +22,7 @@ const sizes = {
   custom: '',
 };
 
-export const PlayButton = ({
+const PlayButton = ({
   uri,
   contextUri,
   mode,
@@ -60,3 +60,4 @@ export const PlayButton = ({
     </button>
   );
 };
+export default PlayButton;

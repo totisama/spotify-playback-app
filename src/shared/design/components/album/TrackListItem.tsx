@@ -1,8 +1,13 @@
 import Link from 'next/link';
-import { PlayButton } from '@/shared/design/components/globals/PlayButton';
 import { type Track } from '@/shared/types/spotifyTypes';
 import { formatDuration } from '@/shared/lib/formatDuration';
 import { PlayIcon } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+const PlayButton = dynamic(
+  async () => await import('@/shared/design/components/globals/PlayButton'),
+  { ssr: false }
+);
 
 export const TrackListItem = ({
   track,

@@ -1,8 +1,13 @@
 import Image from 'next/image';
 import { type Album } from '@/shared/types/spotifyTypes';
 import Link from 'next/link';
-import { PlayButton } from '../globals/PlayButton';
 import { PlayIcon } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+const PlayButton = dynamic(
+  async () => await import('@/shared/design/components/globals/PlayButton'),
+  { ssr: false }
+);
 
 export const AlbumItem = ({ album }: { album: Album }) => {
   return (

@@ -1,9 +1,12 @@
-'use client';
-
 import { type Track } from '@/shared/types/spotifyTypes';
-import { PlayButton } from '@/shared/design/components/globals/PlayButton';
 import { PlayIcon, TimerIcon } from 'lucide-react';
 import { TrackListItem } from './TrackListItem';
+import dynamic from 'next/dynamic';
+
+const PlayButton = dynamic(
+  async () => await import('@/shared/design/components/globals/PlayButton'),
+  { ssr: false }
+);
 
 export default function TrackList({
   tracks,

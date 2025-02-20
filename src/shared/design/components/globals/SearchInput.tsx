@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 
-export const SearchInput = ({ delay = 500 }: { delay: number }) => {
+const SearchInput = ({ delay = 500 }: { delay: number }) => {
   const [search, setSearch] = useState('');
   const value = useDebounce(search, delay);
   const router = useRouter();
@@ -29,3 +29,5 @@ export const SearchInput = ({ delay = 500 }: { delay: number }) => {
     </div>
   );
 };
+
+export default SearchInput;
