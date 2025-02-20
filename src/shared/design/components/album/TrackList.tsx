@@ -1,7 +1,7 @@
 'use client';
 
 import { type Track } from '@/shared/types/spotifyTypes';
-import { PlayButton } from '../globals/PlayButton';
+import { PlayButton } from '@/shared/design/components/globals/PlayButton';
 import { PlayIcon, TimerIcon } from 'lucide-react';
 import { TrackListItem } from './TrackListItem';
 

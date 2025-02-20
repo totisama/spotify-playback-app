@@ -12,6 +12,7 @@ export interface SpotifyPlayer {
   togglePlay: () => void;
   previousTrack: () => void;
   nextTrack: () => void;
+  seek: (value: number) => Promise<void>;
   addListener: (event: string, callback: (args: any) => void) => SpotifyPlayer;
   getCurrentState: () => Promise<SpotifyPlayerState | null>;
 }
