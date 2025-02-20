@@ -8,11 +8,6 @@ export function useSpotifyControls() {
     useSpotifyPlayer();
 
   const ensurePlaybackActive = async () => {
-    if (!deviceIdRef.current) {
-      console.warn('No active device. Transferring playback...');
-      return;
-    }
-
     try {
       await fetch('https://api.spotify.com/v1/me/player', {
         method: 'PUT',
@@ -22,7 +17,6 @@ export function useSpotifyControls() {
         },
         body: JSON.stringify({
           device_ids: [deviceIdRef.current],
-          play: false,
         }),
       });
       console.log('Playback transferred to Web Player.');
@@ -31,11 +25,37 @@ export function useSpotifyControls() {
     }
   };
 
-  const playSong = async (uri: string) => {
+  const playSong = async ({
+    uri,
+    contextUri,
+  }: {
+    uri?: string;
+    contextUri?: string;
+  }) => {
     if (!deviceIdRef.current) {
       console.warn('No active device. Trying to transfer playback...');
-      await ensurePlaybackActive();
       return;
+    }
+
+    if (!uri && !contextUri) {
+      console.warn('No URI or context URI provided.');
+      return;
+    }
+
+    if (uri && contextUri) {
+      console.warn('Both URI and context URI provided.');
+      return;
+    }
+
+    await ensurePlaybackActive();
+
+    const body: { uris?: string[]; context_uri?: string } = {};
+
+    if (uri) {
+      body.uris = [uri];
+    }
+    if (contextUri) {
+      body.context_uri = contextUri;
     }
 
     try {
@@ -45,9 +65,7 @@ export function useSpotifyControls() {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          uris: [uri],
-        }),
+        body: JSON.stringify(body),
       });
       console.log('Playing song:', uri);
     } catch (error) {
