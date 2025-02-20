@@ -17,7 +17,7 @@ export default function TrackList({
       <section className='mb-4'>
         <PlayButton
           mode='album'
-          uri={albumUri}
+          contextUri={albumUri}
           size='medium'
         >
           <PlayIcon className='h-5 w-5 fill-white' />
