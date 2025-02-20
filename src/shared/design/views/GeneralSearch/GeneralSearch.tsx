@@ -15,7 +15,7 @@ const GeneralSearch = ({ searchResults }: GeneralSearchProps) => {
   const topTrack = tracks.items.length > 0 ? tracks.items[0] : null;
 
   return (
-    <>
+    <div className='p-6'>
       {/* Top Result Section */}
       {topTrack && (
         <Section title='Top result'>
@@ -67,7 +67,7 @@ const GeneralSearch = ({ searchResults }: GeneralSearchProps) => {
           <NotFoundMessage text={'No albums found'} />
         )}
       </Section>
-    </>
+    </div>
   );
 };
 
