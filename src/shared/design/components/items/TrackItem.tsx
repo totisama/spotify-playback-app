@@ -18,6 +18,7 @@ export const TrackItem = ({ track }: { track: Track }) => {
         <PlayButton
           mode='track'
           uri={track.uri}
+          size='small'
         >
           ▶
         </PlayButton>

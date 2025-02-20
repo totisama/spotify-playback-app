@@ -21,6 +21,7 @@ export const ArtistHeader = ({ artist }: { artist: Artist }) => {
           <PlayButton
             mode='artist'
             contextUri={artist.uri}
+            size='custom'
           >
             ▶ Play
           </PlayButton>
