@@ -6,7 +6,7 @@ export const ArtistItem = ({ artist }: { artist: Artist }) => {
   return (
     <li
       key={artist.id}
-      className='rounded-lg bg-secondary p-4 transition-transform hover:scale-105'
+      className='rounded-lg bg-secondary p-4 transition-transform duration-300 ease-out hover:scale-110'
     >
       <Link href={`/artist/${artist.id}`}>
         <div className='relative h-40 w-full'>
