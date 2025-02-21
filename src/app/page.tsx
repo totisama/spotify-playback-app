@@ -9,6 +9,8 @@ console.log('Resolved Site URL:', siteUrl);
 export default async function HomePage() {
   const response = await fetch(`${siteUrl}/api/following`);
 
+  console.log({ response });
+
   if (!response.ok) {
     return <Error text='Failed to fetch data' />;
   }
