@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { type Album } from '@/shared/types/spotifyTypes';
+import { Link } from 'next-view-transitions';
 
 export const AlbumHeader = ({ album }: { album: Album }) => {
   return (
