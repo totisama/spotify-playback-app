@@ -6,6 +6,7 @@ import { Header } from '@/shared/design/layout/Header';
 import { SpotifyPlayerProvider } from '@/shared/context/SpotifyPlayerContext';
 import { ErrorBoundary } from '@/shared/design/components/globals/ErrorBoundary';
 import Loading from './Loading';
+import { ViewTransitions } from 'next-view-transitions';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -24,25 +25,27 @@ export default function RootLayout({
         id='app'
         className='h-screen px-2'
       >
-        <SpotifyPlayerProvider>
-          <header className='grid-area-header'>
-            <Header />
-          </header>
-          <aside className='grid-area-aside overflow-y-auto rounded-lg bg-secondary'>
-            <AsideMenu />
-          </aside>
+        <ViewTransitions>
+          <SpotifyPlayerProvider>
+            <header className='grid-area-header'>
+              <Header />
+            </header>
+            <aside className='grid-area-aside overflow-y-auto rounded-lg bg-secondary'>
+              <AsideMenu />
+            </aside>
 
-          <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-              <main className='grid-area-main overflow-y-auto rounded-lg bg-foreground'>
-                {children}
-              </main>
-            </Suspense>
-          </ErrorBoundary>
-          <footer className='grid-area-player flex items-center justify-between bg-black px-3'>
-            <Player />
-          </footer>
-        </SpotifyPlayerProvider>
+            <ErrorBoundary>
+              <Suspense fallback={<Loading />}>
+                <main className='grid-area-main overflow-y-auto rounded-lg bg-foreground'>
+                  {children}
+                </main>
+              </Suspense>
+            </ErrorBoundary>
+            <footer className='grid-area-player flex items-center justify-between bg-black px-3'>
+              <Player />
+            </footer>
+          </SpotifyPlayerProvider>
+        </ViewTransitions>
       </body>
     </html>
   );

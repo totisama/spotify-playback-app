@@ -1,5 +1,5 @@
 import { SpotifyIcon } from '@/shared/design/icons';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import dynamic from 'next/dynamic';
 
 const SearchInput = dynamic(

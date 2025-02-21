@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { type Artist } from '@/shared/types/spotifyTypes';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 
 const ArtistItem = ({ artist }: { artist: Artist }) => {
   return (
