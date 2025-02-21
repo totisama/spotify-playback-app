@@ -78,6 +78,12 @@ To use the **Spotify API**, you must:
 
 ---
 
+## 🧪 Deployment
+
+**[https://spotify-playback-app.vercel.app](https://spotify-playback-app.vercel.app)**
+
+---
+
 ## 📜 License
 
 This project is licensed under the **MIT License**.
