@@ -118,6 +118,22 @@ export function useSpotifyControls() {
     setVolume(newVolume);
   };
 
+  const followArtists = async (artistIds: string[]) => {
+    if (!deviceIdRef.current) {
+      console.warn('No active device.');
+      return;
+    }
+
+    if (!artistIds.length) {
+      console.warn('No artist IDs provided.');
+      return;
+    }
+
+    await ensurePlaybackActive();
+
+    await spotifyFetch(`/me/following?type=artist`, 'PUT', { ids: artistIds });
+  };
+
   return {
     playPause,
     nextTrack,
@@ -130,5 +146,6 @@ export function useSpotifyControls() {
     setVolume,
     changeVolume,
     seekPosition,
+    followArtists,
   };
 }
