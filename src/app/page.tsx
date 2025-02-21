@@ -4,7 +4,6 @@ import { Section } from '@/shared/design/layout/Section';
 import ArtistItem from '@/shared/design/components/items/ArtistItem';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL;
-console.log('Resolved Site URL:', siteUrl);
 
 export default async function HomePage() {
   const response = await fetch(`${siteUrl}/api/following`, {
@@ -24,7 +23,7 @@ export default async function HomePage() {
         {artists.length === 0 ? (
           <p className='text-gray-400'>You are not following any artists.</p>
         ) : (
-          <ul className='grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
+          <ul className='grid w-full grid-cols-1 gap-5 md:grid-cols-auto-fill'>
             {artists.map((artist) => (
               <ArtistItem
                 key={artist.id}
