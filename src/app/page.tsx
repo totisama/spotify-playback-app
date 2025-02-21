@@ -6,9 +6,7 @@ import ArtistItem from '@/shared/design/components/items/ArtistItem';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL;
 
 export default async function HomePage() {
-  const response = await fetch(`${siteUrl}/api/following`, {
-    cache: 'no-store',
-  });
+  const response = await fetch(`${siteUrl}/api/following`);
 
   if (!response.ok) {
     return <Error text='Failed to fetch data' />;

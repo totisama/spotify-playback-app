@@ -6,9 +6,7 @@ import { Link } from 'next-view-transitions';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL;
 
 export const AsideMenu = async () => {
-  const response = await fetch(`${siteUrl}/api/following`, {
-    cache: 'no-store',
-  });
+  const response = await fetch(`${siteUrl}/api/following`);
 
   if (!response.ok) {
     return <Error text='Failed to fetch data' />;
