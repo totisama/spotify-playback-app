@@ -11,8 +11,6 @@ export default async function HomePage() {
     cache: 'no-store',
   });
 
-  console.log({ response });
-
   if (!response.ok) {
     return <Error text='Failed to fetch data' />;
   }
