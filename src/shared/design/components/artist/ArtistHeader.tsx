@@ -1,7 +1,12 @@
 import { type Artist } from '@/shared/types/spotifyTypes';
 import Image from 'next/image';
-import { PlayButton } from '@/shared/design/components/globals/PlayButton';
 import { PlayIcon } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+const PlayButton = dynamic(
+  async () => await import('@/shared/design/components/globals/PlayButton'),
+  { ssr: false }
+);
 
 export const ArtistHeader = ({ artist }: { artist: Artist }) => {
   return (

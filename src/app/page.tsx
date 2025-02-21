@@ -1,32 +1,27 @@
 import { Error } from '@/shared/design/components/globals/Error';
-import {
-  type UserInfoResponse,
-  type FollowingArtistsResponse,
-} from '@/shared/types/spotifyTypes';
+import { type FollowingArtistsResponse } from '@/shared/types/spotifyTypes';
 import { Section } from '@/shared/design/layout/Section';
 import { ArtistItem } from '@/shared/design/components/items/ArtistItem';
 
-export default async function HomePage() {
-  const [followingResponse, userInfoResponse] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/following`),
-    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/user-info`),
-  ]);
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL;
+console.log('Resolved Site URL:', siteUrl);
 
-  if (!followingResponse.ok || !userInfoResponse.ok) {
+export default async function HomePage() {
+  const response = await fetch(`${siteUrl}/api/following`, {
+    cache: 'no-store',
+  });
+
+  console.log({ response });
+
+  if (!response.ok) {
     return <Error text='Failed to fetch data' />;
   }
-
-  const [followingData, userData] = await Promise.all([
-    followingResponse.json(),
-    userInfoResponse.json(),
-  ]);
-
-  const artists = (followingData as FollowingArtistsResponse).following.items;
-  const user: UserInfoResponse = userData.user;
+  const followingData: FollowingArtistsResponse = await response.json();
+  const artists = followingData.following.items;
 
   return (
     <div className='space-y-4 p-6'>
-      <h2 className='text-3xl text-spotify-green'>Hi, {user.display_name}!</h2>
+      <h2 className='text-3xl text-spotify-green'>Hi!</h2>
       <Section title='Followed Artists'>
         {artists.length === 0 ? (
           <p className='text-gray-400'>You are not following any artists.</p>

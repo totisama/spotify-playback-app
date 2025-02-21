@@ -1,6 +1,11 @@
 import { SpotifyIcon } from '@/shared/design/icons';
-import { SearchInput } from '@/shared/design/components/globals/SearchInput';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+const SearchInput = dynamic(
+  async () => await import('@/shared/design/components/globals/SearchInput'),
+  { ssr: false }
+);
 
 export const Header = () => {
   return (

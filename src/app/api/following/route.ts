@@ -8,7 +8,6 @@ export async function GET() {
     const res = await fetch(`${SPOTIFY_API_URL}/me/following?type=artist`, {
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
       },
     });
 

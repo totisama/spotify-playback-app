@@ -17,7 +17,9 @@ export async function GET(request: NextRequest) {
 
   try {
     const res = await fetch(`${SPOTIFY_API_URL}/albums/${albumId}?market=ES`, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     if (!res.ok) throw new Error(`Failed to fetch album`);
