@@ -1,7 +1,7 @@
 import { Error } from '@/shared/design/components/globals/Error';
 import { type FollowingArtistsResponse } from '@/shared/types/spotifyTypes';
 import { Section } from '@/shared/design/layout/Section';
-import { ArtistItem } from '@/shared/design/components/items/ArtistItem';
+import ArtistItem from '@/shared/design/components/items/ArtistItem';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL;
 console.log('Resolved Site URL:', siteUrl);
@@ -10,8 +10,6 @@ export default async function HomePage() {
   const response = await fetch(`${siteUrl}/api/following`, {
     cache: 'no-store',
   });
-
-  console.log({ response });
 
   if (!response.ok) {
     return <Error text='Failed to fetch data' />;

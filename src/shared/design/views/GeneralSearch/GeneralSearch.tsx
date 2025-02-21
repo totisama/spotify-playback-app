@@ -1,5 +1,5 @@
 import { type GeneralSearchResponse } from '@/shared/types/spotifyTypes';
-import { ArtistItem } from '@/shared/design/components/items/ArtistItem';
+import ArtistItem from '@/shared/design/components/items/ArtistItem';
 import { TrackItem } from '@/shared/design/components/items/TrackItem';
 import { TopTrack } from '@/shared/design/components/items/TopTrack';
 import { AlbumItem } from '@/shared/design/components/items/AlbumItem';
@@ -40,7 +40,7 @@ const GeneralSearch = ({ searchResults }: GeneralSearchProps) => {
 
       <Section title='Artists'>
         {artists.items.length > 0 ? (
-          <ul className='md:grid-cols-auto-fill grid w-full grid-cols-1 gap-5'>
+          <ul className='grid w-full grid-cols-1 gap-5 md:grid-cols-auto-fill'>
             {artists.items.slice(0, 6).map((artist) => (
               <ArtistItem
                 key={artist.id}
@@ -55,7 +55,7 @@ const GeneralSearch = ({ searchResults }: GeneralSearchProps) => {
 
       <Section title='Albums'>
         {albums.items.length > 0 ? (
-          <ul className='md:grid-cols-auto-fill grid w-full grid-cols-1 gap-5'>
+          <ul className='grid w-full grid-cols-1 gap-5 md:grid-cols-auto-fill'>
             {albums.items.slice(0, 5).map((album) => (
               <AlbumItem
                 key={album.id}
