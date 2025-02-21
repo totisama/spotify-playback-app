@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { type Artist } from '@/shared/types/spotifyTypes';
 import Link from 'next/link';
 
-export const ArtistItem = ({ artist }: { artist: Artist }) => {
+const ArtistItem = ({ artist }: { artist: Artist }) => {
   return (
     <li
       key={artist.id}
@@ -25,3 +25,5 @@ export const ArtistItem = ({ artist }: { artist: Artist }) => {
     </li>
   );
 };
+
+export default ArtistItem;
