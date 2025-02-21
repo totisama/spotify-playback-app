@@ -11,7 +11,9 @@ export default async function SearchPage({
   params: { search: string };
 }) {
   const response = await fetch(
-    `${siteUrl}/api/general-search?q=${encodeURIComponent(params.search)}`
+    `${siteUrl}/api/general-search?q=${encodeURIComponent(params.search)}, {
+    cache: 'no-store',
+  }`
   );
   if (!response.ok) {
     return <Error text={'Failed to fetch search results'} />;

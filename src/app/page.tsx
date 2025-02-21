@@ -7,7 +7,9 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL;
 console.log('Resolved Site URL:', siteUrl);
 
 export default async function HomePage() {
-  const response = await fetch(`${siteUrl}/api/following`);
+  const response = await fetch(`${siteUrl}/api/following`, {
+    cache: 'no-store',
+  });
 
   console.log({ response });
 
