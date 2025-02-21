@@ -10,9 +10,7 @@ export default async function ArtistPage({
 }: {
   params: { id: string };
 }) {
-  const response = await fetch(`${siteUrl}/api/artist?id=${id}`, {
-    cache: 'no-store',
-  });
+  const response = await fetch(`${siteUrl}/api/artist?id=${id}`);
   if (!response.ok) {
     return <Error text={'Failed to fetch search results'} />;
   }
